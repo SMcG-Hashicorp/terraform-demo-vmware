@@ -26,6 +26,11 @@
 9. review and apply stage, then later review and apply prod
 9. destroy from GUI (API script if needed is `~/Developer/destroy.sh hashidemos a-tf-demo-vmware-TEST`)
 
+### Sentinel Failures
+* \> 4 CPUs
+* \> 8GB RAM
+* 100GB disk
+
 ## Completed Code
 ```
 module "virtual-machine" {
