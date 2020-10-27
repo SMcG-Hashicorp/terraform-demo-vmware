@@ -9,3 +9,6 @@ module "virtual-machine" {
 }
 
 variable "environment" {}
+
+output "name" { value = module.virtual-machine.name }
+output "ssh_ip" { value = module.virtual-machine.ssh_addr }
