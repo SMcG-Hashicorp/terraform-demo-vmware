@@ -46,7 +46,9 @@ variable "environment" {}
 
 output "name" { value = module.virtual-machine.name }
 output "ssh_ip" { value = module.virtual-machine.ssh_addr }
-
+```
+### Add a bare resource (will fail Sentinel policy check)
+```
 provider "vsphere" {
   allow_unverified_ssl = true
 }
