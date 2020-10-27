@@ -30,7 +30,7 @@
 ```
 module "virtual-machine" {
   source  = "app.terraform.io/hashidemos/virtual-machine/vsphere"
-  version = "0.1.2"
+  version = "0.1.3"
 
   app_name    = "ninjas-skunkworks-nginx"
   description = "a skunkworks project"
@@ -46,6 +46,15 @@ variable "environment" {}
 
 output "name" { value = module.virtual-machine.name }
 output "ssh_ip" { value = module.virtual-machine.ssh_addr }
+
+provider "vsphere" {
+  allow_unverified_ssl = true
+}
+
+resource "vsphere_resource_pool" "resource_pool" {
+  name                    = "terraform-resource-pool-test"
+  parent_resource_pool_id = module.virtual-machine.compute_cluster_id
+}
 ```
 
 ## Futures
