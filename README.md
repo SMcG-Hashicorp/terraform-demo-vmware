@@ -24,6 +24,7 @@ apply sentinel policies
 * state history + diffs
 * variables
 * RBAC
+incorporate `terraform state show module.virtual-machine.vsphere_virtual_machine.vm`
 6. now open PR, show speculative plan
 7. show and explain sentinel policy as code
 8. merge PR, show plans queued in both stage and prod
@@ -32,4 +33,22 @@ apply sentinel policies
 
 ## Completed Code
 ```
+module "virtual-machine" {
+  source  = "app.terraform.io/hashidemos/virtual-machine/vsphere"
+  version = "0.1.2"
+
+  app_name    = "ninjas-skunkworks-nginx"
+  description = "a skunkworks project"
+  environment = var.environment
+  owner       = "008103"
+
+  num_cpus  = "2"
+  memory    = "2048"
+  disk_size = "20"
+}
+
+variable "environment" {}
+
+output "name" { value = module.virtual-machine.name }
+output "ssh_ip" { value = module.virtual-machine.ssh_addr }
 ```
