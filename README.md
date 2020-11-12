@@ -26,7 +26,14 @@
 9. review and apply stage, then later review and apply prod
 9. destroy from GUI (API script if needed is `~/Developer/destroy.sh hashidemos a-tf-demo-vmware-TEST`)
 
+### Sentinel Failures
+* \> 4 CPUs
+* \> 8GB RAM
+* 100GB disk
+
 ## Completed Code
+For **Packet** use `0.1.3` and for **Oban** use `0.2.0`.
+
 ```
 module "virtual-machine" {
   source  = "app.terraform.io/hashidemos/virtual-machine/vsphere"
@@ -37,9 +44,9 @@ module "virtual-machine" {
   environment = var.environment
   owner       = "008103"
 
-  num_cpus  = "2"
-  memory    = "2048"
-  disk_size = "20"
+  # num_cpus  = "2"
+  # memory    = "2048"
+  # disk_size = "20"
 }
 
 variable "environment" {}
@@ -53,9 +60,16 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
+# use for Packet
 resource "vsphere_resource_pool" "resource_pool" {
   name                    = "terraform-resource-pool-test"
   parent_resource_pool_id = module.virtual-machine.compute_cluster_id
+}
+
+# use for Oban
+resource "vsphere_resource_pool" "resource_pool" {
+  name                    = "terraform-resource-pool-test"
+  parent_resource_pool_id = module.virtual-machine.resource_pool_id
 }
 ```
 

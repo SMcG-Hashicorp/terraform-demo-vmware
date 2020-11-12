@@ -7,8 +7,9 @@ with provisioner scripts to install:
 * consul
 
 ## Steps
+Tested on Packer 1.6.5
 1. Export your vCenter Server password as the `VCENTER_PASSWORD` environment variable. On some operating systems you can copy the password to your clipboard and use pbpaste like so:
 ```
 export VCENTER_PASSWORD=`pbpaste`
 ```
-2. Run `packer build ubuntu-16-template.json`
+2. Run `packer build ubuntu-16-template-packet.json` or `packer build ubuntu-16-template-oban.json`
