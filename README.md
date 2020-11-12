@@ -32,12 +32,12 @@
 * 100GB disk
 
 ## Completed Code
-For **Packet** use `0.1.3` and for **Oban** use `0.2.0`.
+For **Packet** use `0.1.4` and for **Oban** use `0.2.1`.
 
 ```
 module "virtual-machine" {
   source  = "app.terraform.io/hashidemos/virtual-machine/vsphere"
-  version = "0.1.3"
+  version = "0.2.1"
 
   app_name    = "ninjas-skunkworks-nginx"
   description = "a skunkworks project"
@@ -52,6 +52,7 @@ module "virtual-machine" {
 variable "environment" {}
 
 output "name" { value = module.virtual-machine.name }
+output "http_ip" { value = module.virtual-machine.http_addr }
 output "ssh_ip" { value = module.virtual-machine.ssh_addr }
 ```
 ### Add a bare resource (will fail Sentinel policy check)
