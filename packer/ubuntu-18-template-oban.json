@@ -1,8 +1,22 @@
 {
     "variables": {
-        "vm_name": "ubuntu-16-template",
-        "vcenter_server": "10.100.0.3",
-        "vcenter_username": "administrator@vsphere.local",
+        "vm_name": "ubuntu-18-template",
+
+        "ssh_username": "assareh",
+        "ssh_password": "assareh",
+
+        "iso-url": "https://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.04.5-server-amd64.iso",
+        "iso-checksum": "8c5fc24894394035402f66f3824beb7234b757dd2b5531379cb310cedfdf0996",
+
+        "network": "VM Network",
+
+        "datacenter": "Oban",
+        "resource_pool": "",
+        "cluster": "MainCluster/MainCluster",
+        "datastore": "datastore1",
+
+        "vcenter_server": "192.168.10.13",
+        "vcenter_username": "administrator@assareh.com",
         "vcenter_password": "{{env `VCENTER_PASSWORD`}}"
     },
 
@@ -12,7 +26,7 @@
     {
       "type": "vsphere-iso",
 
-      "notes": "Created by Andy Assareh\nubuntu-16.04.4-server-amd64.iso\nUsername: hashicorp\nPassword: hashicorp",
+      "notes": "Created by Andy Assareh\nubuntu-16.04.4-server-amd64.iso\nUsername: assareh\nPassword: assareh",
 
       "vcenter_server":      "{{user `vcenter_server`}}",
       "username":            "{{user `vcenter_username`}}",
@@ -22,34 +36,38 @@
       "vm_name": "{{user `vm_name`}}",
       "convert_to_template": "true",
 
-      "datacenter": "PacketDatacenter",
-      "resource_pool": "",
-      "cluster": "MainCluster/MainCluster",
-      "datastore": "datastore1",
+      "datacenter": "{{user `datacenter`}}",
+      "resource_pool": "{{user `resource_pool`}}",
+      "cluster": "{{user `cluster`}}",
+      "datastore": "{{user `datastore`}}",
 
       "guest_os_type": "ubuntu64Guest",
 
-      "ssh_username": "hashicorp",
-      "ssh_password": "hashicorp",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
 
       "CPUs":             1,
       "RAM":              512,
       "RAM_reserve_all": true,
 
       "disk_controller_type":  "pvscsi",
-      "disk_size":        16384,
-      "disk_thin_provisioned": true,
+      "storage": [
+        {
+          "disk_size": 16384,
+          "disk_thin_provisioned": true
+        }
+      ],
 
       "network_adapters": [
         {
-          "network": "VM Network",
+          "network": "{{user `network`}}",
           "network_card": "vmxnet3"
         }
       ],
 
-      "iso_paths": [
-        "[datastore1] ISO/ubuntu-16.04.4-server-amd64.iso"
-      ],
+      "iso_url": "{{user `iso-url`}}",
+      "iso_checksum": "{{user `iso-checksum`}}",
+
       "floppy_files": [
         "{{template_dir}}/preseed.cfg"
       ],
@@ -78,9 +96,9 @@
     {
       "type": "shell",
       "scripts": [
-        "open-vm-tools.sh"
+        "bootstrap.sh"
       ],
-      "execute_command": "echo 'hashicorp' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+      "execute_command": "echo 'assareh' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
     }
   ]
 }

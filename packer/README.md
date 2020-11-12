@@ -1,5 +1,5 @@
 # README
-simple packer example to create an ubuntu 16 template vm on vsphere
+simple packer example to create an ubuntu 18 template vm on vsphere
 
 with provisioner scripts to install:
 * open-vm tools
@@ -12,4 +12,4 @@ Tested on Packer 1.6.5
 ```
 export VCENTER_PASSWORD=`pbpaste`
 ```
-2. Run `packer build ubuntu-16-template-packet.json` or `packer build ubuntu-16-template-oban.json`
+2. Run `packer build ubuntu-18-template-packet.json` for Packet datacenter or `packer build ubuntu-18-template-oban.json` for Oban datacenter.
