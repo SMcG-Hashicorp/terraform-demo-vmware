@@ -6,6 +6,8 @@ module "virtual-machine" {
   description = "a skunkworks project"
   environment = var.environment
   owner       = "008103"
+
+  num_cpus  = "2"
 }
 
 variable "environment" {}
