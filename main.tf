@@ -7,7 +7,7 @@ module "virtual-machine" {
   environment = var.environment
   owner       = "008103"
 
-  num_cpus  = "2"
+  num_cpus  = "6"
 }
 
 variable "environment" {}
