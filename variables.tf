@@ -1,0 +1,9 @@
+variable "app_name" {}
+variable "description" {}
+variable "environment" {}
+variable "owner" {}
+variable "vsphere_server" {}
+variable "vsphere_dc" {}
+variable "vsphere_host" {}
+variable "vsphere_datastore" {}
+variable "vsphere_network" {}
