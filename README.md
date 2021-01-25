@@ -32,12 +32,12 @@
 * 100GB disk
 
 ## Completed Code
-For **Packet** use `0.1.4` and for **Oban** use `0.2.1`.
+For **Edinburgh** use `1.0.1`.
 
 ```
 module "virtual-machine" {
   source  = "app.terraform.io/hashidemos/virtual-machine/vsphere"
-  version = "0.2.1"
+  version = "1.0.1"
 
   app_name    = "ninjas-skunkworks-nginx"
   description = "a skunkworks project"
@@ -61,13 +61,7 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
-# use for Packet
-resource "vsphere_resource_pool" "resource_pool" {
-  name                    = "terraform-resource-pool-test"
-  parent_resource_pool_id = module.virtual-machine.compute_cluster_id
-}
-
-# use for Oban
+# use for Edinburgh? - need to test
 resource "vsphere_resource_pool" "resource_pool" {
   name                    = "terraform-resource-pool-test"
   parent_resource_pool_id = module.virtual-machine.resource_pool_id
@@ -75,12 +69,4 @@ resource "vsphere_resource_pool" "resource_pool" {
 ```
 
 ## Futures
-develop a script to create workspaces
-* name-testing
-* name-staging
-* name-production
-* set workspace specific variables (environment)
-* set execution mode to agent (maybe)
-* connect VCS for staging and prod
-* generate remote_backend.tf files
-* apply sentinel policies
+* adapt/complete the workspaces code from `vsphere-workspaces`
