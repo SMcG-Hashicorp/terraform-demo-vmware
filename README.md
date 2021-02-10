@@ -45,9 +45,9 @@ module "virtual-machine" {
   environment = var.environment
   owner       = "008103"
 
-  # num_cpus  = "2"
-  # memory    = "2048"
-  # disk_size = "20"
+  # num_cpus  = "4"
+  # memory    = "8192"
+  # disk_size = "100"
 }
 
 variable "environment" {}
