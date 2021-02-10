@@ -10,10 +10,10 @@
 5. Open browser window signed in to Terraform Cloud as myself.
 
 ## Demo Script
-1. old way (google it) vs new way (developer goes to PMR) -- sign in as dev using okta SSO
+1. old way (google it) vs new way (go to PMR) -- sign in as dev using SSO
 2. select module
 3. go to github and show bare repo (this can be auto generated, repo, workspace as a service. put short lived creds in here as well)
-4. edit main.tf 9 lines and boom, commit to dev. [VCS driven] "this is important because it enables me to map from the changes in git to how it will impact my real life infra"
+4. edit main.tf 9 lines and boom, commit to dev. (this is important because it enables you to map from the changes in git to how it will impact the real life infra)
 5. while it’s provisioning show:
 * workspaces
 * run history
