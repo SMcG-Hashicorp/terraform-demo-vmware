@@ -7,7 +7,7 @@ module "virtual-machine" {
   environment = var.environment
   owner       = "008103"
 
-  # num_cpus  = "2"
+  num_cpus  = "4"
   # memory    = "2048"
   # disk_size = "20"
 }
