@@ -10,10 +10,10 @@
 5. Open browser window signed in to Terraform Cloud as myself.
 
 ## Demo Script
-1. old way (google it) vs new way (developer goes to PMR) -- sign in as dev using okta SSO
+1. old way (google it) vs new way (go to PMR) -- sign in as dev using SSO
 2. select module
 3. go to github and show bare repo (this can be auto generated, repo, workspace as a service. put short lived creds in here as well)
-4. edit main.tf 9 lines and boom, commit to dev. [VCS driven] "this is important because it enables me to map from the changes in git to how it will impact my real life infra"
+4. edit main.tf 9 lines and boom, commit to dev. (this is important because it enables you to map from the changes in git to how it will impact the real life infra)
 5. while it’s provisioning show:
 * workspaces
 * run history
@@ -24,7 +24,8 @@
 7. show and explain sentinel policy as code
 8. merge PR, show plans queued in both stage and prod
 9. review and apply stage, then later review and apply prod
-9. destroy from GUI (API script if needed is `~/Developer/destroy.sh hashidemos a-tf-demo-vmware-TEST`)
+10. increase CPU, RAM, and/or Disk and repeat
+11. destroy from GUI (API script if needed is `~/Developer/destroy.sh hashidemos a-tf-demo-vmware-TEST`)
 
 ### Sentinel Failures
 * \> 4 CPUs
@@ -32,21 +33,21 @@
 * 100GB disk
 
 ## Completed Code
-For **Packet** use `0.1.4` and for **Oban** use `0.2.1`.
+For **Edinburgh** use `1.0.1`.
 
 ```
 module "virtual-machine" {
   source  = "app.terraform.io/hashidemos/virtual-machine/vsphere"
-  version = "0.2.1"
+  version = "1.0.1"
 
   app_name    = "ninjas-skunkworks-nginx"
   description = "a skunkworks project"
   environment = var.environment
   owner       = "008103"
 
-  # num_cpus  = "2"
-  # memory    = "2048"
-  # disk_size = "20"
+  # num_cpus  = "4"
+  # memory    = "8192"
+  # disk_size = "100"
 }
 
 variable "environment" {}
@@ -55,32 +56,6 @@ output "name" { value = module.virtual-machine.name }
 output "http_ip" { value = module.virtual-machine.http_addr }
 output "ssh_ip" { value = module.virtual-machine.ssh_addr }
 ```
-### Add a bare resource (will fail Sentinel policy check)
-```
-provider "vsphere" {
-  allow_unverified_ssl = true
-}
-
-# use for Packet
-resource "vsphere_resource_pool" "resource_pool" {
-  name                    = "terraform-resource-pool-test"
-  parent_resource_pool_id = module.virtual-machine.compute_cluster_id
-}
-
-# use for Oban
-resource "vsphere_resource_pool" "resource_pool" {
-  name                    = "terraform-resource-pool-test"
-  parent_resource_pool_id = module.virtual-machine.resource_pool_id
-}
-```
 
 ## Futures
-develop a script to create workspaces
-* name-testing
-* name-staging
-* name-production
-* set workspace specific variables (environment)
-* set execution mode to agent (maybe)
-* connect VCS for staging and prod
-* generate remote_backend.tf files
-* apply sentinel policies
+* adapt/complete the workspaces code from `vsphere-workspaces`
