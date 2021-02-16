@@ -45,6 +45,7 @@ module "virtual-machine" {
   environment = var.environment
   owner       = "008103"
 
+  # vsphere_template = "Windows10"
   # num_cpus  = "4"
   # memory    = "8192"
   # disk_size = "100"
