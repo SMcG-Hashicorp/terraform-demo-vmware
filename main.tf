@@ -1,7 +1,7 @@
 provider "vsphere" {
   user                 = "vsphere\\Administrator"
   password             = "VMware1!"
-  vsphere_server       = "vCenter67.vSphere.Lab"
+  vsphere_server       = "192.168.1.202"
   allow_unverified_ssl = true
 }
 #provider "vsphere" {
